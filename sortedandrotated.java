@@ -1,10 +1,10 @@
 public class sortedandrotated {
     public static void main(String[] args) {
         int[] arr = { 3, 4, 5, 1, 2 };
-        System.out.println(sortedandrotated(arr));
+        System.out.println(Sortedandrotated(arr));
     }
 
-    public static boolean sortedandrotated(int[] arr) {
+    public static boolean Sortedandrotated(int[] arr) {
         int dipcount = 0;
         for (int i = 1; i < arr.length; i++) {
             if (arr[i] < arr[i - 1]) {

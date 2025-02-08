@@ -1,13 +1,13 @@
 public class selectionsort {
     public static void main(String[] args) {
         int[] nums = { 5, 4, 2, 7, 89, 4 };
-        int[] res = selectionsort(nums);
+        int[] res = Selectionsort(nums);
         for (int i = 0; i < res.length; i++) {
             System.out.println(res[i]);
         }
     }
 
-    public static int[] selectionsort(int[] arr) {
+    public static int[] Selectionsort(int[] arr) {
         // Loop through all array elements
         for (int i = 0; i < arr.length - 1; i++) {
             // Find the minimum element in the unsorted part

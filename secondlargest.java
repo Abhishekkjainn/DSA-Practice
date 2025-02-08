@@ -1,10 +1,10 @@
 public class secondlargest {
     public static void main(String[] args) {
         int[] arr = { 28078, 19451, 935, 28892, 2242, 3570, 5480, 231 };
-        System.out.println(secondlargest(arr));
+        System.out.println(Secondlargest(arr));
     }
 
-    public static int secondlargest(int[] arr) {
+    public static int Secondlargest(int[] arr) {
         int secondlargest = Integer.MIN_VALUE;
         int largest = arr[0];
         if (arr.length <= 1) {
@@ -19,15 +19,6 @@ public class secondlargest {
                 secondlargest = arr[i];
             }
         }
-        // for (int i = 0; i < arr.length; i++) {
-        // if (arr[i] == largest) {
-        // continue;
-        // } else {
-        // if (arr[i] > secondlargest) {
-        // secondlargest = arr[i];
-        // }
-        // }
-        // }
         return secondlargest;
     }
 }
