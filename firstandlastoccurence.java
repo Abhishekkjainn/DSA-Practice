@@ -1,39 +1,44 @@
 public class firstandlastoccurence {
     public static void main(String[] args) {
         int[] nums = { 5, 7, 7, 8, 8, 10 };
-        bound(nums, 8);
+        firstlast(nums, 5);
     }
 
     public static int[] firstlast(int[] nums, int target) {
         int low = 0;
         int high = nums.length - 1;
-        int lowbound = -1;
-        int highbound = -1;
-        int[] ans = new int[2];
-        // Find the lower bound;
+        int[] ans = { -1, -1 }; // Default value if target is not found
+
+        // Find the first occurrence (lower bound)
         while (low <= high) {
-            int mid = low + ((high - low) / 2);
-            if (nums[mid] <= target) {
-                lowbound = mid;
+            int mid = low + (high - low) / 2;
+            if (nums[mid] == target) {
+                ans[0] = mid; // Store the index
+                high = mid - 1; // Continue searching in the left half
+            } else if (nums[mid] < target) {
                 low = mid + 1;
             } else {
                 high = mid - 1;
             }
         }
+
+        // Reset low and high for finding the last occurrence (upper bound)
         low = 0;
         high = nums.length - 1;
+
         while (low <= high) {
-            int mid = low + ((high - low) / 2);
-            if (nums[mid] > target) {
-                highbound = mid;
-                high = mid - 1;
-            } else {
+            int mid = low + (high - low) / 2;
+            if (nums[mid] == target) {
+                ans[1] = mid; // Store the index
+                low = mid + 1; // Continue searching in the right half
+            } else if (nums[mid] < target) {
                 low = mid + 1;
+            } else {
+                high = mid - 1;
             }
         }
-        ans[0] = lowbound;
-        ans[1] = highbound;
-        System.out.println((lowbound) + " " + (highbound - 1));
+
+        System.out.println(ans[0] + " " + ans[1]); // Print the correct indices
         return ans;
     }
 
