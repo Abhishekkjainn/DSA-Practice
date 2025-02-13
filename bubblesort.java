@@ -3,7 +3,7 @@ public class bubblesort {
         int[] arr = { 8, 7, 6, 5, 3, 4, 2, 1 };
         int[] sec = Bubblesort(arr);
         for (int i = 0; i < sec.length; i++) {
-            System.out.println(sec[i]);
+            System.out.print(sec[i] + " ");
         }
     }
 
