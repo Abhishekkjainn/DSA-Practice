@@ -179,6 +179,17 @@ class linkedlist {
         return head;
     }
 
+    public static Node insertAtEnd(Node head, int x) {
+        Node temp = head;
+        Node newnode = new Node(x);
+        while (temp.next != null) {
+            temp = temp.next;
+        }
+
+        temp.next = newnode;
+        return head;
+    }
+
     public static void main(String[] args) {
         int[] arr = { 5, 2, 4, 8, 6 };
         Node head = convertarrtoLL(arr);
@@ -188,6 +199,8 @@ class linkedlist {
         // head = insertheadstart(head, 20);
         // head = insertheadtail(head, 25);
         // head = insertatk(head, 1, 15);
+
+        head = insertAtEnd(head, 15);
 
         Node temp = head;
 
