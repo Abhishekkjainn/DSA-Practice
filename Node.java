@@ -190,8 +190,36 @@ class doublylinkedlist {
         return null;
     }
 
+    public static Node insertafterk(Node head, int p, int x) {
+        Node temp = head;
+        int count = 0;
+
+        while (temp != null) {
+            if (count == p) { // Fix: Directly compare with p (0-based index)
+                Node front = temp.next;
+                Node newNode = new Node(x);
+                newNode.next = front;
+                newNode.back = temp;
+                temp.next = newNode;
+                if (front != null) { // Fix: Avoid NullPointerException
+                    front.back = newNode;
+                }
+                return head;
+            }
+            temp = temp.next;
+            count++;
+        }
+        return head;
+    }
+
+    // reverse a DLL
+    public static Node reverseaDLL(Node head) {
+
+        return head;
+    }
+
     public static void main(String[] args) {
-        int[] arr = { 5, 7, 8, 5, 8 };
+        int[] arr = { 2, 4, 5 };
         Node head = convertarrtoDLL(arr);
         // head = deletehead(head);
         // head = deletetail(head);
@@ -200,7 +228,8 @@ class doublylinkedlist {
         // head = deleteNode(head, 1);
         // head = insertathead(head, 25);
         // head = insertbeforetail(head, 1502);
-        head = insertatk(head, 6, 25);
+        // head = insertatk(head, 6, 25);
+        head = insertafterk(head, 2, 6);
         printDLL(head);
     }
 }
