@@ -107,38 +107,6 @@ class doublylinkedlist {
         return head;
     }
 
-    // public static Node deleteel(Node head, int k) {
-    // int count = 0;
-    // Node temp = head;
-    // if (k == 1) {
-    // head = deletehead(head);
-    // } else {
-    // while (temp != null) {
-    // count++;
-    // if (temp.data == k) {
-    // Node prev = temp.back;
-    // Node front = temp.next;
-    // if (prev == null && front == null) {
-    // return null;
-    // } else if (prev == null) {
-    // temp = temp.next;
-    // temp.next.back = null;
-    // return head;
-    // } else if (front == null) {
-    // temp.back.next = null;
-    // temp.back = null;
-    // return head;
-    // } else {
-    // prev.next = temp.next;
-    // front.back = prev;
-    // }
-    // } else {
-    // temp = temp.next;
-    // }
-    // }
-    // }
-    // return head;
-    // }
     public static Node insertAtEnd(Node head, int x) {
         Node temp = head;
         Node newnode = new Node(x);
@@ -168,15 +136,71 @@ class doublylinkedlist {
         return head;
     }
 
+    // insert before head
+    public static Node insertathead(Node head, int target) {
+        Node newnode = new Node(target);
+        Node temp = head;
+        newnode.next = temp;
+        temp.back = newnode;
+        return newnode;
+    }
+
+    public static Node insertbeforetail(Node head, int k) {
+        Node newNode = new Node(k);
+        Node temp = head;
+        if (head.next == null) {
+            Node makehead = new Node(k);
+            makehead.next = head;
+            head.back = makehead;
+            return makehead;
+        }
+        while (temp.next.next != null) {
+            temp = temp.next;
+        }
+        Node front = temp.next;
+        temp.next = newNode;
+        newNode.back = temp;
+        front.back = newNode;
+        newNode.next = front;
+        return head;
+    }
+
+    public static Node insertatk(Node head, int k, int target) {
+        int count = 0;
+        Node temp = head;
+
+        // Edge cases 1. if(k==1)
+        if (k == 1) {
+            Node newNode = new Node(target, head, null);
+            head.back = newNode;
+            return newNode;
+        }
+
+        while (temp != null) {
+            count++;
+            if (count == (k - 1)) {
+                Node front = temp.next;
+                Node newNode = new Node(target, front, temp);
+                temp.next = newNode;
+                front.back = newNode;
+                return head;
+            }
+            temp = temp.next;
+        }
+        return null;
+    }
+
     public static void main(String[] args) {
-        int[] arr = { 29, 78 };
+        int[] arr = { 5, 7, 8, 5, 8 };
         Node head = convertarrtoDLL(arr);
         // head = deletehead(head);
         // head = deletetail(head);
-        head = deletekth(head, 1);
-
+        // head = deletekth(head, 1);
         // head = insertAtEnd(head, 8);
         // head = deleteNode(head, 1);
+        // head = insertathead(head, 25);
+        // head = insertbeforetail(head, 1502);
+        head = insertatk(head, 6, 25);
         printDLL(head);
     }
 }
