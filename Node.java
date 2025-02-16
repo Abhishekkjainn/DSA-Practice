@@ -466,9 +466,9 @@ class doublylinkedlist {
 
     public static void main(String[] args) {
         int[] arr = { 1, 2, 3, 4, 5 };
-        int[] arr2 = { 4, 5, 9, 9 };
+        // int[] arr2 = { 4, 5, 9, 9 };
         Node head = convertarrtoDLL(arr);
-        Node head2 = convertarrtoDLL(arr2);
+        // Node head2 = convertarrtoDLL(arr2);
         // head = deletehead(head);
         // head = deletetail(head);
         // head = deletekth(head, 1);
