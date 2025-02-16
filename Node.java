@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class Node {
     int data;
     Node next;
@@ -214,13 +216,259 @@ class doublylinkedlist {
 
     // reverse a DLL
     public static Node reverseaDLL(Node head) {
+        Node temp = head;
+        Node last = null;
+        if (temp.next == null) {
+            return temp;
+        }
+        while (temp != null) {
+            last = temp.back;
+            temp.back = temp.next;
+            temp.next = last;
+            temp = temp.back;
+        }
+        return last.back;
+    }
+
+    public static Node add2ll(Node head, Node head2) {
+        int count = 0;
+        double sum = 0;
+        Node temp = head;
+        int count2 = 0;
+        double sum2 = 0;
+        Node temp2 = head2;
+        while (temp != null) {
+            sum = sum + (temp.data * Math.pow(10, count));
+            count++;
+            temp = temp.next;
+        }
+        while (temp2 != null) {
+            sum2 = sum2 + (temp2.data * Math.pow(10, count2));
+            count2++;
+            temp2 = temp2.next;
+        }
+        int total = (int) (sum + sum2);
+        int first = total % 10;
+        total = total / 10;
+        Node newNode = new Node(first);
+        Node temp3 = newNode;
+        while (total > 0) {
+            int test = total % 10;
+            total = total / 10;
+            Node latest = new Node(test, null, temp3);
+            temp3.next = latest;
+            temp3 = temp3.next;
+        }
+        return newNode;
+    }
+
+    public static Node add2lleff(Node head, Node head2) {
+        Node temp = head;
+        Node temp2 = head2;
+        Node DummyNode = new Node(-1);
+        Node current = DummyNode;
+        int carry = 0;
+        int sum = 0;
+
+        while (temp != null || temp2 != null) {
+            sum = carry + ((temp != null) ? temp.data : 0) + ((temp2 != null) ? temp2.data : 0);
+            Node newNode = new Node(sum % 10);
+            carry = sum / 10;
+            current.next = newNode;
+            current = current.next;
+            temp = (temp != null) ? temp.next : temp;
+            temp2 = (temp2 != null) ? temp2.next : temp2;
+        }
+        if (carry != 0) {
+            Node newNode = new Node(carry);
+            current.next = newNode;
+        }
+
+        return DummyNode.next;
+
+    }
+
+    public static Node oddEvenBrute(Node head) {
+        Node temp = head;
+        ArrayList<Integer> oddeven = new ArrayList<>();
+
+        while (temp != null && temp.next != null) {
+            oddeven.add(temp.data);
+            temp = temp.next.next;
+        }
+        if (temp != null) {
+            oddeven.add(temp.data);
+        }
+        temp = head.next;
+        while (temp != null && temp.next != null) {
+            oddeven.add(temp.data);
+            temp = temp.next.next;
+        }
+        if (temp != null) {
+            oddeven.add(temp.data);
+        }
+        temp = head;
+        int i = 0;
+        while (temp != null) {
+            temp.data = oddeven.get(i);
+            i++;
+            temp = temp.next;
+        }
+
+        return head;
+
+    }
+
+    public static Node oddEvenEff(Node head) {
+        if (head == null || head.next == null) {
+            return head;
+        }
+        Node odd = head;
+        Node even = head.next;
+        Node evenhead = head.next;
+
+        while (even != null && even.next != null) {
+            odd.next = odd.next.next;
+            even.next = even.next.next;
+            odd = odd.next;
+            even = even.next;
+        }
+        odd.next = evenhead;
+        return head;
+    }
+
+    public static Node sort012brute(Node head) {
+        int zero = 0;
+        int one = 0;
+        int two = 0;
+        Node temp = head;
+        if (head == null) {
+            return head;
+        }
+        while (temp != null) {
+            if (temp.data == 0) {
+                zero++;
+            } else if (temp.data == 1) {
+                one++;
+            } else {
+                two++;
+            }
+            temp = temp.next;
+        }
+
+        temp = head;
+        while (temp != null) {
+            if (zero != 0) {
+                temp.data = 0;
+                zero--;
+            } else if (one != 0) {
+                temp.data = 1;
+                one--;
+            } else if (two != 0) {
+                temp.data = 2;
+                two--;
+            }
+            temp = temp.next;
+        }
+        return head;
+    }
+
+    public static Node sort012eff(Node head) {
+        Node zeroHead = new Node(-1);
+        Node oneHead = new Node(-1);
+        Node twoHead = new Node(-1);
+
+        Node zero = zeroHead;
+        Node one = oneHead;
+        Node two = twoHead;
+
+        if (head == null || head.next == null) {
+            return head;
+        }
+
+        Node temp = head;
+        while (temp != null) {
+            if (temp.data == 0) {
+                zero.next = temp;
+                zero = temp;
+            } else if (temp.data == 1) {
+                one.next = temp;
+                one = temp;
+            } else {
+                two.next = temp;
+                two = temp;
+            }
+            temp = temp.next;
+        }
+        zero.next = (oneHead.next != null) ? oneHead.next : (twoHead.next != null) ? twoHead.next : null;
+        one.next = twoHead.next;
+        two.next = null;
+
+        return zeroHead.next;
+    }
+
+    // remove nth brute
+    public static Node removeNbrute(Node head, int n) {
+        int count = n;
+        int length = 0;
+        Node temp = head;
+        if (head == null) {
+            return null;
+        }
+        while (temp != null) {
+            length++;
+            temp = temp.next;
+        }
+        if (count == length) {
+            return head.next;
+        }
+        int res = length - count;
+        temp = head;
+        System.out.println(length);
+        System.out.println(count);
+        System.out.println(res);
+
+        int count2 = 0;
+        while (temp != null) {
+            count2++;
+            if (count2 == res) {
+                temp.next = temp.next.next;
+                break;
+            }
+            temp = temp.next;
+        }
 
         return head;
     }
 
+    public static Node removeNeff(Node head, int n) {
+        Node fast = head;
+        Node slow = head;
+
+        for (int i = 0; i < n; i++) {
+            fast = fast.next;
+        }
+
+        if (fast == null) {
+            return head.next;
+        }
+
+        while (fast.next != null) {
+            fast = fast.next;
+            slow = slow.next;
+        }
+
+        slow.next = slow.next.next;
+
+        return head;
+
+    }
+
     public static void main(String[] args) {
-        int[] arr = { 2, 4, 5 };
+        int[] arr = { 1, 2, 3, 4, 5 };
+        int[] arr2 = { 4, 5, 9, 9 };
         Node head = convertarrtoDLL(arr);
+        Node head2 = convertarrtoDLL(arr2);
         // head = deletehead(head);
         // head = deletetail(head);
         // head = deletekth(head, 1);
@@ -229,7 +477,14 @@ class doublylinkedlist {
         // head = insertathead(head, 25);
         // head = insertbeforetail(head, 1502);
         // head = insertatk(head, 6, 25);
-        head = insertafterk(head, 2, 6);
+        // head = insertafterk(head, 2, 6);
+        // head = reverseaDLL(head);
+        // System.out.println(add2ll(head, head2));
+        // head = add2lleff(head, head2);
+        // head = oddEvenEff(head);
+        // head = sort012eff(head);
+        head = removeNeff(head, 5);
         printDLL(head);
+        // printDLL(head2);
     }
 }
