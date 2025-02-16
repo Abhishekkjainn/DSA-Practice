@@ -464,9 +464,17 @@ class doublylinkedlist {
 
     }
 
+    public static Node reverseLL(Node head) {
+        Node temp = head;
+        while (temp != null) {
+
+        }
+        return head;
+    }
+
     public static void main(String[] args) {
         int[] arr = { 1, 2, 3, 4, 5 };
-        // int[] arr2 = { 4, 5, 9, 9 };
+        // int[] arr2 = { 4, 5, 9, 9, 5 };
         Node head = convertarrtoDLL(arr);
         // Node head2 = convertarrtoDLL(arr2);
         // head = deletehead(head);
@@ -483,7 +491,8 @@ class doublylinkedlist {
         // head = add2lleff(head, head2);
         // head = oddEvenEff(head);
         // head = sort012eff(head);
-        head = removeNeff(head, 5);
+        // head = removeNeff(head, 5);
+        // head = reverseLL(head);
         printDLL(head);
         // printDLL(head2);
     }
