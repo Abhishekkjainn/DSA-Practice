@@ -190,8 +190,24 @@ class linkedlist {
         return head;
     }
 
+    public static Node reverseLL(Node head) {
+
+        Node prev = null;
+        Node current = head;
+        Node next = current.next;
+        while (current != null) {
+            next = current.next;
+            current.next = prev;
+            prev = current;
+            current = next;
+        }
+        return prev;
+    }
+
+    // sort a LL
+
     public static void main(String[] args) {
-        int[] arr = { 5, 2, 4, 8, 6 };
+        int[] arr = { 5 };
         Node head = convertarrtoLL(arr);
         // head = removeHead(head);
         // head = removeTail(head);
@@ -200,7 +216,8 @@ class linkedlist {
         // head = insertheadtail(head, 25);
         // head = insertatk(head, 1, 15);
 
-        head = insertAtEnd(head, 15);
+        // head = insertAtEnd(head, 15);
+        head = reverseLL(head);
 
         Node temp = head;
 
