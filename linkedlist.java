@@ -216,7 +216,7 @@ class linkedlist {
             temp = temp.next;
         }
         test = check;
-        while (test >= 0) {
+        while (test > 0) {
             rev = (rev * 10) + test % 10;
             test = test / 10;
         }
@@ -230,10 +230,147 @@ class linkedlist {
         }
     }
 
+    public static void middle(Node head) {
+        Node slow = head;
+        Node fast = head;
+        while (fast.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+        System.out.println(slow.data + " - Middle");
+    }
+
+    public static Node deletemiddlebrute(Node head) {
+        Node temp = head;
+        int count = 0;
+        if (head == null) {
+            return head;
+        }
+
+        while (temp != null) {
+            count++;
+            temp = temp.next;
+        }
+        System.out.println(count + " Count");
+        temp = head;
+
+        for (int i = 0; i < ((count / 2) - 1); i++) {
+            head = head.next;
+        }
+        head.next = head.next.next;
+        return temp;
+    }
+
+    public static Node deletemiddleeff(Node head) {
+        Node slow = head;
+        Node fast = head;
+        Node prev = head;
+        if (head == null || head.next == null) {
+            return null;
+        }
+        while (fast != null && fast.next != null) {
+            prev = slow;
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+        prev.next = prev.next.next;
+        return head;
+    }
+
+    public static Node sortLLbrute(Node head) {
+        int len = 0;
+        Node temp = head;
+        if (head == null) {
+            return null;
+        }
+        while (temp != null) {
+            len++;
+            temp = temp.next;
+        }
+        int[] arr = new int[len];
+        temp = head;
+        int ind = 0;
+        while (temp != null) {
+            arr[ind] = temp.data;
+            temp = temp.next;
+            ind++;
+        }
+        temp = head;
+        ind = 0;
+        for (int i = 0; i < arr.length - 1; i++) {
+            for (int j = 0; j < arr.length - 1 - i; j++) {
+                if (arr[j] > arr[j + 1]) {
+                    int temp1 = arr[j];
+                    arr[j] = arr[j + 1];
+                    arr[j + 1] = temp1;
+                }
+            }
+        }
+        while (temp != null) {
+            temp.data = arr[ind];
+            ind++;
+            temp = temp.next;
+        }
+        return head;
+    }
+
+    public static Node sortLL(Node head) {
+        // Base case: If the list is empty or has only one node, it's already sorted
+        if (head == null || head.next == null) {
+            return head;
+        }
+
+        // Step 1: Split the list into two halves
+        Node middle = getMiddle(head);
+        Node nextToMiddle = middle.next;
+        middle.next = null; // Break the list into two parts
+
+        // Step 2: Recursively sort both halves
+        Node left = sortLL(head);
+        Node right = sortLL(nextToMiddle);
+
+        // Step 3: Merge the two sorted halves
+        return merge(left, right);
+    }
+
+    // Function to find the middle of the linked list
+    private static Node getMiddle(Node head) {
+        Node slow = head, fast = head;
+        while (fast.next != null && fast.next.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+        return slow;
+    }
+
+    // Function to merge two sorted linked lists
+    private static Node merge(Node l1, Node l2) {
+        Node dummy = new Node(0); // Temporary dummy node
+        Node tail = dummy;
+
+        while (l1 != null && l2 != null) {
+            if (l1.data < l2.data) {
+                tail.next = l1;
+                l1 = l1.next;
+            } else {
+                tail.next = l2;
+                l2 = l2.next;
+            }
+            tail = tail.next;
+        }
+
+        // If there are remaining nodes in either list, attach them
+        if (l1 != null) {
+            tail.next = l1;
+        } else {
+            tail.next = l2;
+        }
+
+        return dummy.next; // The merged sorted list
+    }
+
     public static void main(String[] args) {
-        int[] arr = { 8, 0, 7, 1, 7, 7, 9, 7, 5, 2, 9, 1, 7, 3, 7, 0, 6, 5, 1, 7, 7, 9, 3, 8, 1, 5, 7, 7, 8, 4, 0, 9, 3,
-                7, 3, 4, 5, 7, 4, 8, 8, 5, 8, 9, 8, 5, 8, 8, 4, 7, 5, 4, 3, 7, 3, 9, 0, 4, 8, 7, 7, 5, 1, 8, 3, 9, 7, 7,
-                1, 5, 6, 0, 7, 3, 7, 1, 9, 2, 5, 7, 9, 7, 7, 1, 7, 0, 8 };
+        int[] arr = { 5, 8, 9, 4, 1, 2, 3, 4, 6, 8, 8, 5 };
         Node head = convertarrtoLL(arr);
         // head = removeHead(head);
         // head = removeTail(head);
@@ -244,8 +381,10 @@ class linkedlist {
 
         // head = insertAtEnd(head, 15);
         // head = reversell(head);
-        // System.out.println(palindrome(head));'
-        System.out.println(palindrome(head));
+        // System.out.println(palindrome(head));
+        // middle(head);
+        // head = deletemiddleeff(head);
+        head = sortLL(head);
         Node temp = head;
 
         while (temp != null) {
