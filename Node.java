@@ -472,8 +472,45 @@ class doublylinkedlist {
         return head;
     }
 
+    public static Node removeDuplicates(Node head) {
+        Node temp = head;
+        while (temp != null && temp.next != null) {
+            Node next = temp.next;
+            if (temp.data == next.data) {
+                temp.next = next.next;
+                // next = next.next;
+            } else {
+                temp = next;
+            }
+        }
+        return head;
+    }
+
+    public static Node deleteallkeys(Node head, int x) {
+
+        if (head == null) {
+            return null;
+        }
+        while (head != null && head.data == x) {
+            head = head.next;
+        }
+        if (head == null) {
+            return null;
+        }
+        Node temp = head;
+
+        while (temp != null && temp.next != null) {
+            if (temp.next.data == x) {
+                temp.next = temp.next.next;
+            } else {
+                temp = temp.next;
+            }
+        }
+        return head;
+    }
+
     public static void main(String[] args) {
-        int[] arr = { 1, 2, 3, 4, 5 };
+        int[] arr = { 2, 2, 2, 2, 2, };
         // int[] arr2 = { 4, 5, 9, 9, 5 };
         Node head = convertarrtoDLL(arr);
         // Node head2 = convertarrtoDLL(arr2);
@@ -493,6 +530,8 @@ class doublylinkedlist {
         // head = sort012eff(head);
         // head = removeNeff(head, 5);
         // head = reverseLL(head);
+        // head = removeDuplicates(head);
+        head = deleteallkeys(head, 2);
         printDLL(head);
         // printDLL(head2);
     }

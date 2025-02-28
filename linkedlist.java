@@ -369,6 +369,41 @@ class linkedlist {
         return dummy.next; // The merged sorted list
     }
 
+    public static boolean detectloop(Node head) {
+        Node slow = head;
+        Node fast = head;
+        int count = 0;
+        if (head == null) {
+            return false;
+        }
+        while (slow != null) {
+            if (fast != null && fast.next != null) {
+                fast = fast.next.next;
+            }
+            slow = slow.next;
+            if (fast == slow) {
+                return true;
+            }
+
+        }
+        return false;
+    }
+
+    public static void detectloopindex(Node head) {
+        Node slow = head;
+        Node fast = head;
+        int ind = 0;
+        while (fast != null && fast.next != null) {
+            fast = fast.next.next;
+            slow = slow.next;
+            ind++;
+            if (fast == slow) {
+                System.out.println(ind);
+            }
+        }
+        System.out.println(-1);
+    }
+
     public static void main(String[] args) {
         int[] arr = { 5, 8, 9, 4, 1, 2, 3, 4, 6, 8, 8, 5 };
         Node head = convertarrtoLL(arr);
