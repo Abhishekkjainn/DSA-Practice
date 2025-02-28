@@ -372,7 +372,6 @@ class linkedlist {
     public static boolean detectloop(Node head) {
         Node slow = head;
         Node fast = head;
-        int count = 0;
         if (head == null) {
             return false;
         }
