@@ -25,7 +25,7 @@ public class infixtopostfix {
         }
     }
 
-    public static String infixtopostfix(String s) {
+    public static String infixxtopostfix(String s) {
         Stack<Character> st = new Stack<>();
         String ans = "";
         for (int i = 0; i < s.length(); i++) {
@@ -182,7 +182,7 @@ public class infixtopostfix {
     }
 
     public static void main(String[] args) {
-        // prefixtonfix(infixtoprefix(postfixtoinfix(infixtopostfix("(A+B)*(C-D)"))));
+        // prefixtonfix(infixtoprefix(postfixtoinfix(infixxtopostfix("(A+B)*(C-D)"))));
         postfixtoprefix(prefixtopostfix("*-/AB+CD^EF"));
     }
 }
