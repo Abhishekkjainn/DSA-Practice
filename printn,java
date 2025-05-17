@@ -1,0 +1,12 @@
+class printn{
+    static void printrec(int n){
+        if(n >= 0){
+            return;
+        }
+        System.out.println("Abhishek Jain ,");
+        printrec(n-1);
+    }
+    public static void main(String[] args) {
+        printrec(10);
+    }
+}

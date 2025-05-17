@@ -1,7 +1,7 @@
 public class slidingwindow {
     public static void main(String[] args) {
-        int[] nums = { 1, 79, 80, 1, 1, 1, 200, 1 };
-        getmaxpoints(nums, 3);
+        int[] nums = { 6, 2, 3, 4, 7, 2, 1, 7, 1 };
+        getmaxpoints(nums, 4);
     }
 
     public static void getmaxpoints(int[] nums, int k) {
@@ -20,7 +20,9 @@ public class slidingwindow {
                 maxsum = lsum + rsum;
             }
         }
+        int val = 'a';
         System.out.println(maxsum);
+        System.out.println(val);
     }
 
 }
