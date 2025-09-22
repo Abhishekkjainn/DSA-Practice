@@ -4,9 +4,14 @@ A collection of LeetCode questions to ace the coding interview! - Created using 
 ## Array
 |  |
 | ------- |
+| [0001-two-sum](https://github.com/Abhishekkjainn/DSA-Practice/tree/master/0001-two-sum) |
 | [0046-permutations](https://github.com/Abhishekkjainn/DSA-Practice/tree/master/0046-permutations) |
 ## Backtracking
 |  |
 | ------- |
 | [0046-permutations](https://github.com/Abhishekkjainn/DSA-Practice/tree/master/0046-permutations) |
+## Hash Table
+|  |
+| ------- |
+| [0001-two-sum](https://github.com/Abhishekkjainn/DSA-Practice/tree/master/0001-two-sum) |
 <!---LeetCode Topics End-->
